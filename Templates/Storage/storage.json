@@ -1,62 +1,38 @@
 {
-    "name": "string",
-    "type": "Microsoft.Storage/storageAccounts",
-    "apiVersion": "2018-07-01",
-    "sku": {
-      "name": "string",
-      "restrictions": [
-        {
-          "reasonCode": "string"
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "storageAccountName":{
+        "type": "string",
+        "metadata": {
+          "description": "Azure Storage account name."
         }
-      ]
-    },
-    "kind": "string",
-    "location": "string",
-    "tags": {},
-    "identity": {
-      "type": "SystemAssigned"
-    },
-    "properties": {
-      "customDomain": {
-        "name": "string",
-        "useSubDomainName": "boolean"
       },
-      "encryption": {
-        "services": {
-          "blob": {
-            "enabled": "boolean"
-          },
-          "file": {
-            "enabled": "boolean"
-          }
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      }
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Storage/storageAccounts",
+        "name": "[parameters('storageAccountName')]",
+        "apiVersion": "2016-01-01",
+        "location": "[parameters('location')]",
+        "sku": {
+          "name": "Standard_LRS"
         },
-        "keySource": "string",
-        "keyvaultproperties": {
-          "keyname": "string",
-          "keyversion": "string",
-          "keyvaulturi": "string"
-        }
-      },
-      "networkAcls": {
-        "bypass": "string",
-        "virtualNetworkRules": [
-          {
-            "id": "string",
-            "action": "Allow",
-            "state": "string"
+        "kind": "Storage",
+        "properties": {}
+      }
+    ],
+    "outputs": {
+        "storageUri": {
+            "type": "string",
+            "value": "[reference(parameters('storageAccountName')).primaryEndpoints.blob]"
           }
-        ],
-        "ipRules": [
-          {
-            "value": "string",
-            "action": "Allow"
-          }
-        ],
-        "defaultAction": "string"
-      },
-      "accessTier": "string",
-      "azureFilesAadIntegration": "boolean",
-      "supportsHttpsTrafficOnly": "boolean",
-      "isHnsEnabled": "boolean"
     }
   }
