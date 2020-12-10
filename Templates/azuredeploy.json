@@ -263,7 +263,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": true,
-            "storageUri": "[reference('linkedTemplate').outputs.storageUri.value]"
+            "storageUri": "[reference('linkedtemplate').outputs.storageUri.value]"
           }
         }
       }
