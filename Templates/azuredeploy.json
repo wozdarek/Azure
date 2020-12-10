@@ -220,7 +220,7 @@
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "LinkedTemplate",
+        "linkedTemplate",
         "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
       ],
       "properties": {
@@ -263,7 +263,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": true,
-            "storageUri": "[reference('linkedtemplate').outputs.storageUri.value]"
+            "storageUri": "[reference('linkedTemplate').outputs.storageUri.value]"
           }
         }
       }
